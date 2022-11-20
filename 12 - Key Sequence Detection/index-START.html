@@ -7,6 +7,18 @@
 </head>
 <body>
 <script>
+  let sequence = [];
+  const code = "bowser";
+  function checkSequence(e) {
+    sequence.push(e.key)
+    if (sequence.length > code.length) {
+      sequence = sequence.slice(-code.length);
+    }
+    if (sequence.join("").includes(code)) {
+      alert("You entered a secret code!!");
+    }
+  }
+  document.addEventListener("keyup", checkSequence);
 </script>
 </body>
 </html>

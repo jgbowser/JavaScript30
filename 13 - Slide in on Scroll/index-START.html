@@ -58,6 +58,29 @@
       };
     }
 
+    const sliderImages = document.querySelectorAll(".slide-in");
+
+    function checkSlide(e) {
+      sliderImages.forEach(image => {
+        // this gets the pixel position that the bottom of the window is currently at, aka how far down we have scrolled
+        const bottomOfTheScreen = window.scrollY + window.innerHeight;
+        // this tells us when we've scrolled halfway through the image, which will trigger our transition
+        const slideInAt = bottomOfTheScreen - image.height / 2;
+        // now the bottom of the image, used when we scroll back up
+        const imageBottom = image.offsetTop + image.height;
+        const isHalfShown = slideInAt > image.offsetTop;
+        const isNotScrolledPast = window.scrollY < imageBottom;
+
+        if (isHalfShown && isNotScrolledPast) {
+          image.classList.add("active")
+        } else {
+          image.classList.remove("active")
+        }
+      })
+    }
+
+    window.addEventListener("scroll", debounce(checkSlide));
+
   </script>
 
   <style>
